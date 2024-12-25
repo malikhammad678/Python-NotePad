@@ -21,6 +21,19 @@ This is a simple Notepad application built in Python using the Tkinter library. 
 - **Help**
   - "About" section with application information.
 
+- **Shortcut Keys**
+  - **New File**: `Ctrl + N`
+  - **Open File**: `Ctrl + O`
+  - **Save File**: `Ctrl + S`
+  - **Save As**: `Ctrl + Shift + S`
+  - **Exit**: `Ctrl + Q`
+  - **Undo**: `Ctrl + Z`
+  - **Redo**: `Ctrl + Y`
+  - **Cut**: `Ctrl + X`
+  - **Copy**: `Ctrl + C`
+  - **Paste**: `Ctrl + V`
+  - **Select All**: `Ctrl + A`
+
 ---
 
 ## Requirements
