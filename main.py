@@ -96,7 +96,7 @@ class Notepad:
 
     def exit_application(self):
         self.on_close()
-
+           
     def undo(self):
         self.text_area.event_generate("<<Undo>>")
 
