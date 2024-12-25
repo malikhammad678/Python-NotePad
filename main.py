@@ -18,25 +18,25 @@ class Notepad:
         # Add File Menu
         file_menu = tk.Menu(self.menu_bar, tearoff=0)
         self.menu_bar.add_cascade(label="File", menu=file_menu)
-        file_menu.add_command(label="New", command=self.new_file)
-        file_menu.add_command(label="Open", command=self.open_file)
-        file_menu.add_command(label="Save", command=self.save_file)
-        file_menu.add_command(label="Save As", command=self.save_as_file)
+        file_menu.add_command(label="New", command=self.new_file, accelerator="Ctrl+N")
+        file_menu.add_command(label="Open", command=self.open_file, accelerator="Ctrl+O")
+        file_menu.add_command(label="Save", command=self.save_file, accelerator="Ctrl+S")
+        file_menu.add_command(label="Save As", command=self.save_as_file, accelerator="Ctrl+Shift+S")
         file_menu.add_separator()
-        file_menu.add_command(label="Exit", command=self.exit_application)
+        file_menu.add_command(label="Exit", command=self.exit_application, accelerator="Ctrl+Q")
 
         # Add Edit Menu
         edit_menu = tk.Menu(self.menu_bar, tearoff=0)
         self.menu_bar.add_cascade(label="Edit", menu=edit_menu)
-        edit_menu.add_command(label="Undo", command=self.undo)
-        edit_menu.add_command(label="Redo", command=self.redo)
+        edit_menu.add_command(label="Undo", command=self.undo, accelerator="Ctrl+Z")
+        edit_menu.add_command(label="Redo", command=self.redo, accelerator="Ctrl+Y")
         edit_menu.add_separator()
-        edit_menu.add_command(label="Cut", command=self.cut)
-        edit_menu.add_command(label="Copy", command=self.copy)
-        edit_menu.add_command(label="Paste", command=self.paste)
-        edit_menu.add_command(label="Delete", command=self.delete)
+        edit_menu.add_command(label="Cut", command=self.cut, accelerator="Ctrl+X")
+        edit_menu.add_command(label="Copy", command=self.copy, accelerator="Ctrl+C")
+        edit_menu.add_command(label="Paste", command=self.paste, accelerator="Ctrl+V")
+        edit_menu.add_command(label="Delete", command=self.delete, accelerator="Del")
         edit_menu.add_separator()
-        edit_menu.add_command(label="Select All", command=self.select_all)
+        edit_menu.add_command(label="Select All", command=self.select_all, accelerator="Ctrl+A")
 
         # Add Help Menu
         help_menu = tk.Menu(self.menu_bar, tearoff=0)
@@ -44,6 +44,23 @@ class Notepad:
         help_menu.add_command(label="About", command=self.show_about)
 
         self.file_path = None
+
+        # Bind Shortcut Keys
+        self.bind_shortcuts()
+
+
+    def bind_shortcuts(self):
+        self.root.bind("<Control-n>", lambda event: self.new_file())
+        self.root.bind("<Control-o>", lambda event: self.open_file())
+        self.root.bind("<Control-s>", lambda event: self.save_file())
+        self.root.bind("<Control-S>", lambda event: self.save_as_file())
+        self.root.bind("<Control-q>", lambda event: self.exit_application())
+        self.root.bind("<Control-z>", lambda event: self.undo())
+        self.root.bind("<Control-y>", lambda event: self.redo())
+        self.root.bind("<Control-x>", lambda event: self.cut())
+        self.root.bind("<Control-c>", lambda event: self.copy())
+        self.root.bind("<Control-v>", lambda event: self.paste())
+        self.root.bind("<Control-a>", lambda event: self.select_all())
 
     def new_file(self):
         self.text_area.delete(1.0, tk.END)
@@ -78,9 +95,7 @@ class Notepad:
             self.file_path = file_path
 
     def exit_application(self):
-        if messagebox.askyesno("Exit", "Do you want to save changes before exiting?"):
-            self.save_file()
-        self.root.quit()
+        self.on_close()
 
     def undo(self):
         self.text_area.event_generate("<<Undo>>")
@@ -105,6 +120,7 @@ class Notepad:
 
     def show_about(self):
         messagebox.showinfo("About Notepad", "This is a simple Notepad application built in Python with Tkinter.")
+
 
 if __name__ == "__main__":
     root = tk.Tk()
