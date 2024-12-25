@@ -34,4 +34,4 @@ This is a simple Notepad application built in Python using the Tkinter library. 
 
 1. Run the script:
    ```bash
-   python notepad.py
+   python main.py
